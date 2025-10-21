@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <header>
+
+        <div id='vueDemo'>
+            <h1>{{message}}</h1>
+            <p>Numbers : {{numbers}}</p>
+            <p>Number from array {{numbers[2]}}</p>
+            <p>Lucky Number is : {{luckyNumber}}</p>
+
+            <ul>
+                <li v-for="number in numbers" :key="number">{{number}}</li>
+            </ul>
+            <p>User Name: {{user.name}}, Age: {{user.age}}</p>
+
+            <p>User is {{ user.age >= 18 ? 'an Adult' : 'a Minor' }}</p>
+            <p>Lucky number is an {{luckyNumber%2==0?"even number" : "odd number"}}</p>
+
+            <p>Random number function: {{getRandomLuckyNumber()}}</p>
+        </div>
+    </header>
+</body>
+
+<script>
+    const { createApp, ref, reactive } = Vue;
+
+    createApp({
+        setup() {
+
+            const message = "Hello from Vue 3 Composition API!";
+            let luckyNumber = ref(6);
+            const numbers = [1, 2, 3, 4, 5];
+            const user = reactive({
+                name: "Alice",
+                age: 30
+            });
+
+            getRandomLuckyNumber = () => {
+                setTimeout(() => {
+                    luckyNumber.value = + 1;
+                    user.name = "Bob";
+                    user.age = 290;
+                }, 1000);
+                return luckyNumber.value;
+            }
+
+            return {
+                message,
+                numbers,
+                user,
+                luckyNumber,
+                getRandomLuckyNumber
+            }
+        }
+    }).mount('#vueDemo');
+</script>
+
+</html>
