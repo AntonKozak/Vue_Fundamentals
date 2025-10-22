@@ -23,6 +23,61 @@
             <p>Lucky number is an {{luckyNumber%2==0?"even number" : "odd number"}}</p>
 
             <p>Random number function: {{getRandomLuckyNumber()}}</p>
+            <!-- add to DOM but do not show  -->
+            <p v-show='user.canPay'>User is shown if user can pay {{ user.name }}</p>
+            <!-- do not add to DOM if condition is false -->
+            <p v-if='user.canPay'>If user can pay you see his name {{ user.name }}</p>
+
+            <!-- if else and else depense on user.spendAmount -->
+
+            <p v-if='user.spendAmount > 0'>If user spend amount is positive: {{user.spendAmount}}</p>
+            <p v-else-if='user.spendAmount === 0'>User has no spending amount: {{user.spendAmount}}</p>
+            <p v-else>User has negative spending amount: {{user.spendAmount}}</p>
+
+            <!-- v-for directive examples -->
+            <h3>V-For Directive Examples:</h3>
+
+            <!-- v-for with array of strings -->
+            <h4>Loop through fruits:</h4>
+            <ul>
+                <li v-for="fruit in fruits" :key="fruit">{{fruit}}</li>
+            </ul>
+
+            <!-- v-for with array index -->
+            <h4>Loop with index:</h4>
+            <ol>
+                <li v-for="(fruit, index) in fruits" :key="index">{{index + 1}}: {{fruit}}</li>
+            </ol>
+
+            <!-- v-for with array of objects -->
+            <h4>Loop through users:</h4>
+            <div v-for="person in users" :key="person.id" style="border: 1px solid #ccc; margin: 5px; padding: 10px;">
+                <p><strong>Name:</strong> {{person.name}}</p>
+                <p><strong>Age:</strong> {{person.age}}</p>
+                <p><strong>City:</strong> {{person.city}}</p>
+            </div>
+
+            <!-- v-for with object properties -->
+            <h4>Loop through object properties:</h4>
+            <ul>
+                <li v-for="(value, key) in userProfile" :key="key">
+                    <strong>{{key}}:</strong> {{value}}
+                </li>
+            </ul>
+
+            <!-- v-for with numbers -->
+            <h4>Loop through numbers 1-5:</h4>
+            <span v-for="n in 5" :key="n" style="margin-right: 10px; padding: 5px; background: #f0f0f0;">{{n}}</span>
+
+        </div>
+
+        <div id='VueDemoPart2'>
+            <h2>This is directive changes many times v-html directive</h2>
+            <span v-html='directiveMessage()'></span>
+            <h2>This is directive changes only one time v-once directive</h2>
+            <span v-once>{{linkUrl}}</span>
+
+            <p>Visit my <a v-bind:href="linkUrl">GitHub</a></p>
         </div>
     </header>
 </body>
@@ -38,16 +93,39 @@
             const numbers = [1, 2, 3, 4, 5];
             const user = reactive({
                 name: "Alice",
-                age: 30
+                age: 30,
+                canPay: true,
+                spendAmount: -100
             });
+
+            // Data for v-for examples
+            const fruits = ["Apple", "Banana", "Orange", "Grape", "Strawberry"];
+
+            const users = [
+                { id: 1, name: "John", age: 25, city: "New York" },
+                { id: 2, name: "Jane", age: 30, city: "Los Angeles" },
+                { id: 3, name: "Bob", age: 35, city: "Chicago" }
+            ];
+
+            const userProfile = {
+                firstName: "Alice",
+                lastName: "Johnson",
+                email: "alice@example.com",
+                phone: "+1-555-123-4567",
+                country: "USA"
+            };
 
             getRandomLuckyNumber = () => {
                 setTimeout(() => {
-                    luckyNumber.value = + 1;
+                    luckyNumber.value = Math.floor(Math.random() * 10) + 1;
                     user.name = "Bob";
                     user.age = 290;
                 }, 1000);
                 return luckyNumber.value;
+            }
+
+            directiveMessage = () => {
+                return `This is a ${message} from a method used in the template!`;
             }
 
             return {
@@ -55,10 +133,31 @@
                 numbers,
                 user,
                 luckyNumber,
-                getRandomLuckyNumber
+                getRandomLuckyNumber,
+                directiveMessage,
+                fruits,
+                users,
+                userProfile
             }
         }
     }).mount('#vueDemo');
+
+    // Create a separate app for the second div
+    createApp({
+        setup() {
+            const message = "This is directive message";
+
+            const directiveMessage = () => {
+                return `This is a ${message} from a method used in the template!`;
+            }
+
+            const linkUrl = "https://github.com/AntonKozak";
+            return {
+                directiveMessage,
+                linkUrl
+            }
+        }
+    }).mount('#VueDemoPart2');
 </script>
 
 </html>
