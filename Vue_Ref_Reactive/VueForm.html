@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <header>
+
+        <div id='vueForm'>
+            <form v-on:submit.prevent="handleSubmit">
+                <h2>Simple Vue Form</h2>
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" v-on:blur='validateName' v-model.trim="formData.name" />
+                <span v-if="nameError" style="color: red; font-size: 22px;">{{ nameError }}</span>
+                <br /><br />
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" v-model.trim="formData.email" />
+                <br /><br />
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" v-model.number="formData.age" />
+                <br /><br />
+
+                <label>Gender:</label><br />
+                <input type="radio" id="male" value="male" v-model="formData.gender" />
+                <label for="male">Male</label><br />
+                <input type="radio" id="female" value="female" v-model="formData.gender" />
+                <label for="female">Female</label>
+                <br /><br />
+
+                <label>Favorite Product (choose ONE):</label><br />
+                <input type="radio" id="snickers" value="snickers" v-model="formData.product" />
+                <label for="snickers">Snickers</label><br />
+                <input type="radio" id="mars" value="mars" v-model="formData.product" />
+                <label for="mars">Mars</label><br />
+                <input type="radio" id="bounty" value="bounty" v-model="formData.product" />
+                <label for="bounty">Bounty</label><br />
+                <input type="radio" id="dumle" value="dumle" v-model="formData.product" />
+                <label for="dumle">Dumle</label>
+                <br /><br />
+
+                <label>Products You Like (choose MANY):</label><br />
+                <input type="checkbox" id="check_snickers" value="snickers" v-model="formData.multipleProducts" />
+                <label for="check_snickers">Snickers</label><br />
+                <input type="checkbox" id="check_mars" value="mars" v-model="formData.multipleProducts" />
+                <label for="check_mars">Mars</label><br />
+                <input type="checkbox" id="check_bounty" value="bounty" v-model="formData.multipleProducts" />
+                <label for="check_bounty">Bounty</label><br />
+                <input type="checkbox" id="check_dumle" value="dumle" v-model="formData.multipleProducts" />
+                <label for="check_dumle">Dumle</label>
+                <br /><br />
+
+                <label for="country">Country:</label><br />
+                <select id="country" v-model="formData.country" style="padding: 5px; width: 200px;">
+                    <option value="">-- Select Country --</option>
+                    <option value="sweden">Sweden</option>
+                    <option value="norway">Norway</option>
+                    <option value="denmark">Denmark</option>
+                    <option value="finland">Finland</option>
+                    <option value="germany">Germany</option>
+                    <option value="usa">USA</option>
+                    <option value="canada">Canada</option>
+                </select>
+                <br /><br />
+
+                <label for="subscribe">Subscribe to Newsletter:</label>
+                <input type="checkbox" id="subscribe" v-model="formData.subscribe" />
+                <br /><br />
+
+                <button type="submit">Submit</button>
+
+                <!-- Real-time display to show how Vue tracks selections -->
+                <div style="background-color: #f0f0f0; padding: 15px; margin: 20px 0; border-radius: 5px;">
+                    <h4>How Vue Knows (Real-time):</h4>
+                    <p><strong>Selected Gender:</strong> {{ formData.gender || 'None selected' }}</p>
+                    <p><strong>Single Product:</strong> {{ formData.product || 'None selected' }}</p>
+                    <p><strong>Multiple Products:</strong> {{ formData.multipleProducts.length > 0 ?
+                        formData.multipleProducts.join(', ') : 'None selected' }}</p>
+                    <p><strong>Selected Country:</strong> {{ formData.country || 'None selected' }}</p>
+                    <p><strong>Name Validation:</strong> {{ nameError || 'Valid' }}</p>
+                    <hr>
+                    <p><em><strong>Radio buttons:</strong> Same v-model = Only ONE choice!</em></p>
+                    <p><em><strong>Checkboxes:</strong> Same v-model with ARRAY = MANY choices!</em></p>
+                    <p><em><strong>Dropdown (select):</strong> v-model binds to selected option value!</em></p>
+                </div>
+
+                <div v-if="submitted">
+                    <h3>Form Data:</h3>
+                    <p>Name: {{ formData.name }}</p>
+                    <p>Email: {{ formData.email }}</p>
+                    <p>Age: {{ formData.age }}</p>
+                    <p>Gender: {{ formData.gender }}</p>
+                    <p>Favorite Product: {{ formData.product }}</p>
+                    <p>Products You Like: {{ formData.multipleProducts.length > 0 ? formData.multipleProducts.join(', ')
+                        : 'None' }}</p>
+                    <p>Country: {{ formData.country }}</p>
+                    <p>Subscribed: {{ formData.subscribe ? 'Yes' : 'No' }}</p>
+                </div>
+            </form>
+        </div>
+
+    </header>
+
+    <script>
+        const { createApp, reactive, ref } = Vue;
+
+        createApp({
+            setup() {
+                const formData = reactive({
+                    name: '',
+                    email: '',
+                    age: null,
+                    gender: '',
+                    product: '',
+                    multipleProducts: [],
+                    country: '',
+                    subscribe: false
+                });
+
+                const submitted = ref(false);
+                const nameError = ref('');
+
+                function validateName() {
+                    if (formData.name.length < 2) {
+                        nameError.value = 'Name must be at least 2 characters';
+                    } else {
+                        nameError.value = '';
+                    }
+                }
+
+                function handleSubmit() {
+                    submitted.value = true;
+                }
+
+                return {
+                    formData,
+                    submitted,
+                    nameError,
+                    validateName,
+                    handleSubmit
+                };
+            }
+        }).mount('#vueForm');
+    </script>

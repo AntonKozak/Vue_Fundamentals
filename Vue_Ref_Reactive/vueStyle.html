@@ -6,13 +6,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title>Styles in Vue</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+            border: 2px solid red;
+        }
+
+        .success {
+            color: green;
+            border: 2px solid green;
+        }
+
+        .warning {
+            color: orange;
+            border: 2px solid orange;
+        }
+
+        .card {
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .active {
+            background-color: lightblue;
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body>
 
     <div id='app'>
-        <div>
-            Hello world!
+        <h1>Vue Styling Examples</h1>
+
+        <!-- 1. Inline Style Object -->
+        <h2>1. Inline Style Object:</h2>
+        <div :style='styleObject'>
+            Hello world with reactive style object!
+        </div>
+
+        <!-- 2. Multiple Style Objects -->
+        <h2>2. Multiple Style Objects:</h2>
+        <div :style='[baseStyles, conditionalStyles]'>
+            Multiple style objects combined
+        </div>
+
+        <!-- 3. Conditional Styling with Ternary -->
+        <h2>3. Conditional Styling:</h2>
+        <div :style='{ color: isActive ? "blue" : "red", fontSize: isLarge ? "24px" : "16px" }'>
+            Conditional styling with ternary operators
+        </div>
+
+        <!-- 4. Class Binding - Single Class -->
+        <h2>4. Class Binding - Single Class:</h2>
+        <div :class='{ highlight: isHighlighted }'>
+            This text can be highlighted
+        </div>
+        <button @click='isHighlighted = !isHighlighted'>
+            Toggle Highlight
+        </button>
+
+        <!-- 5. Class Binding - Multiple Classes -->
+        <h2>5. Multiple Class Binding:</h2>
+        <div :class='{ active: isActive, disabled: isDisabled, card: true }' class='static-class'>
+            Multiple classes with conditions
+        </div>
+        <button @click='isActive = !isActive'>Toggle Active</button>
+        <button @click='isDisabled = !isDisabled'>Toggle Disabled</button>
+
+        <!-- 6. Class Binding with Computed -->
+        <h2>6. Dynamic Class Based on Status:</h2>
+        <div :class='statusClass' class='card'>
+            Status: {{ status }} - This box changes color based on status
+        </div>
+        <select v-model='status'>
+            <option value='success'>Success</option>
+            <option value='error'>Error</option>
+            <option value='warning'>Warning</option>
+        </select>
+
+        <!-- 7. Array Class Binding -->
+        <h2>7. Array Class Binding:</h2>
+        <div :class='[activeClass, { highlight: isHighlighted }]'>
+            Array-based class binding
+        </div>
+
+        <!-- 8. Conditional Styling with Methods -->
+        <h2>8. Method-based Styling:</h2>
+        <div v-for='user in users' :key='user.id' :style='getUserStyle(user)' :class='getUserClass(user)' class='card'>
+            {{ user.name }} - Age: {{ user.age }}
+        </div>
+
+        <!-- 9. Hover Effects with Vue -->
+        <h2>9. Interactive Styling:</h2>
+        <div @mouseover='hoveredItem = "item1"' @mouseleave='hoveredItem = null'
+            :style='{ backgroundColor: hoveredItem === "item1" ? "lightcyan" : "white" }' class='card'>
+            Hover over me!
+        </div>
+
+        <!-- 10. Form Input Styling -->
+        <h2>10. Form Input Conditional Styling:</h2>
+        <input v-model='inputValue' :class='{ error: inputValue.length < 3, success: inputValue.length >= 3 }'
+            placeholder='Type at least 3 characters'
+            style='padding: 10px; margin: 5px; border-radius: 4px; border: 1px solid #ccc;'>
+        <p>Input length: {{ inputValue.length }}</p>
+
+        <!-- 11. Toggle Controls -->
+        <h2>11. Toggle Controls:</h2>
+        <div style='margin: 20px 0;'>
+            <label><input type='checkbox' v-model='isActive'> Active</label>
+            <label><input type='checkbox' v-model='isLarge'> Large Text</label>
+            <label><input type='checkbox' v-model='isHighlighted'> Highlighted</label>
+            <label><input type='checkbox' v-model='isDisabled'> Disabled</label>
         </div>
     </div>
 
@@ -20,19 +138,85 @@
 
 
 <script>
-    const { createApp, ref, reactive } = Vue;
+    const { createApp, ref, reactive, computed } = Vue;
 
     const app = createApp({
         setup() {
+            // Reactive style objects
             const styleObject = reactive({
                 color: 'blue',
                 fontSize: '20px',
                 border: '2px solid black',
-                padding: '10px'
+                padding: '10px',
+                borderRadius: '8px',
+                backgroundColor: '#f0f0f0'
             });
 
+            const baseStyles = reactive({
+                padding: '15px',
+                margin: '10px',
+                borderRadius: '5px'
+            });
+
+            const conditionalStyles = reactive({
+                backgroundColor: '#e8f4fd',
+                border: '1px solid #007bff'
+            });
+
+            // Reactive state variables
+            const isActive = ref(false);
+            const isLarge = ref(false);
+            const isHighlighted = ref(false);
+            const isDisabled = ref(false);
+            const status = ref('success');
+            const activeClass = ref('card');
+            const hoveredItem = ref(null);
+            const inputValue = ref('');
+
+            // Sample users data
+            const users = ref([
+                { id: 1, name: 'John', age: 25 },
+                { id: 2, name: 'Jane', age: 30 },
+                { id: 3, name: 'Bob', age: 17 }
+            ]);
+
+            // Computed property for status-based class
+            const statusClass = computed(() => {
+                return status.value; // returns 'success', 'error', or 'warning'
+            });
+
+            // Method to get user-specific styles
+            const getUserStyle = (user) => {
+                return {
+                    backgroundColor: user.age >= 18 ? '#d4edda' : '#f8d7da',
+                    color: user.age >= 18 ? '#155724' : '#721c24'
+                };
+            };
+
+            // Method to get user-specific classes
+            const getUserClass = (user) => {
+                return {
+                    success: user.age >= 18,
+                    warning: user.age < 18
+                };
+            };
+
             return {
-                styleObject
+                styleObject,
+                baseStyles,
+                conditionalStyles,
+                isActive,
+                isLarge,
+                isHighlighted,
+                isDisabled,
+                status,
+                statusClass,
+                activeClass,
+                hoveredItem,
+                inputValue,
+                users,
+                getUserStyle,
+                getUserClass
             }
         }
     });
