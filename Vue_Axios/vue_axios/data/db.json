@@ -1,0 +1,53 @@
+{
+  "destination": [
+    {
+      "id": 1,
+      "name": "Bangkok",
+      "days": 5,
+      "funFact": "Home to the world's largest gold Buddha statue.",
+      "price": 100
+    },
+    {
+      "id": 2,
+      "name": "Tokyo",
+      "days": 7,
+      "funFact": "Has more Michelin-starred restaurants than any other city.",
+      "price": 200
+    },
+    {
+      "id": 3,
+      "name": "Paris",
+      "days": 6,
+      "funFact": "Known as the 'City of Light' because it was one of the first cities to have street lighting.",
+      "price": 150
+    },
+    {
+      "id": 4,
+      "name": "New York",
+      "days": 4,
+      "funFact": "Home to the first ever pizzeria in the United States.",
+      "price": 180
+    },
+    {
+      "id": 5,
+      "name": "Sydney",
+      "days": 8,
+      "funFact": "Houses the world's largest natural harbor.",
+      "price": 220
+    },
+    {
+      "id": 6,
+      "name": "Cairo",
+      "days": 5,
+      "funFact": "Home to the Great Pyramid of Giza, one of the Seven Wonders of the Ancient World.",
+      "price": 130
+    },
+    {
+      "id": 7,
+      "name": "Rio de Janeiro",
+      "days": 7,
+      "funFact": "Famous for its annual Carnival festival, one of the biggest in the world.",
+      "price": 170
+    }
+  ]
+}
