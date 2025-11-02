@@ -1,16 +1,19 @@
-<script setup></script>
-
 <template>
-  <div id="app">
-    <h1>Hello bitch</h1>
-  </div>
+
+  <Header></Header>
+  <router-view> </router-view>
+  <h2>Footer</h2>
 </template>
+
+<script setup>
+import Header from './components/Layout/Header.vue';
+</script>
 
 <style>
 #app {
   background-color: #2d2d2d;
   min-height: 100vh;
-  color: white;
+  color: rgb(122, 122, 122);
   font-family: Arial, sans-serif;
 }
 
