@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango_BackEnd", "Mango_Api\Mango_BackEnd.csproj", "{30B790F9-7235-A3A3-BFA8-B0B9CEAF9507}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30B790F9-7235-A3A3-BFA8-B0B9CEAF9507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30B790F9-7235-A3A3-BFA8-B0B9CEAF9507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30B790F9-7235-A3A3-BFA8-B0B9CEAF9507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30B790F9-7235-A3A3-BFA8-B0B9CEAF9507}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FBD6FE5B-8DFA-4BAC-8994-8FDBEBF4E36A}
+	EndGlobalSection
+EndGlobal
