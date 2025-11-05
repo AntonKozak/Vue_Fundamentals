@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -8,6 +10,7 @@ using Mango_Api.Models.Dto;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore; // added
 
 namespace Mango_Api.Controllers;
 
@@ -116,9 +119,122 @@ public class MenuItemController : Controller
         catch (System.Exception ex)
         {
             _response.IsSuccess = false;
-            _response.ErrorMessages = [ex.ToString()];
+            _response.StatusCode = HttpStatusCode.InternalServerError;
+            _response.ErrorMessages = new List<string> { ex.Message };
+            return StatusCode(StatusCodes.Status500InternalServerError, _response);
+        }
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<ApiResponse>> UpdateMenuItem(int id, [FromForm] MenuItemUpdateDto menuItemUpdateDto)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+            {
+                _response.IsSuccess = false;
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                return BadRequest(_response);
+            }
+
+            // replaced invalid call
+            MenuItem? menuItemFromDb = await _db.MenuItems.FirstOrDefaultAsync(u => u.Id == id);
+            if (menuItemFromDb == null)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add("Menu Item Not Found");
+                _response.StatusCode = HttpStatusCode.NotFound;
+                return NotFound(_response);
+            }
+
+
+            menuItemFromDb.Name = menuItemUpdateDto.Name;
+            menuItemFromDb.Description = menuItemUpdateDto.Description;
+            menuItemFromDb.Price = menuItemUpdateDto.Price;
+            menuItemFromDb.Category = menuItemUpdateDto.Category;
+            menuItemFromDb.SpecialTag = menuItemUpdateDto.SpecialTag;
+
+            if (menuItemUpdateDto.File != null && menuItemUpdateDto.File.Length > 0)
+            {
+                var webRoot = _webHostEnvironment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+                var imagesPath = Path.Combine(webRoot, "images");
+                Directory.CreateDirectory(imagesPath);
+
+                var originalExt = Path.GetExtension(menuItemUpdateDto.File.FileName);
+                var baseName = Path.GetFileNameWithoutExtension(menuItemUpdateDto.File.FileName);
+
+                // slugify: letters, numbers, - and _
+                baseName = Regex.Replace(baseName, @"[^a-zA-Z0-9-_]+", "-").Trim('-');
+
+                var fileName = $"{baseName}-{DateTimeOffset.UtcNow.ToUnixTimeSeconds()}{originalExt}";
+                var filePath = Path.Combine(imagesPath, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await menuItemUpdateDto.File.CopyToAsync(stream);
+                }
+
+                menuItemFromDb.Image = $"images/{fileName}";
+            }
+            _db.MenuItems.Update(menuItemFromDb);
+            await _db.SaveChangesAsync();
+            _response.Result = menuItemFromDb;
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.IsSuccess = true;
+            return Ok(_response);
+        }
+        catch (System.Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.StatusCode = HttpStatusCode.InternalServerError;
+            _response.ErrorMessages = new List<string> { ex.Message };
+            return StatusCode(StatusCodes.Status500InternalServerError, _response);
+        }
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteMenuItem(int id)
+    {
+        if (id == 0)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessages.Add("Invalid Id");
+            _response.StatusCode = HttpStatusCode.BadRequest;
+            return BadRequest(_response);
+        }
+        var menuItem = await _db.MenuItems.FirstOrDefaultAsync(u => u.Id == id);
+        if (menuItem == null)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessages.Add("Menu Item Not Found");
+            _response.StatusCode = HttpStatusCode.NotFound;
+            return NotFound(_response);
         }
 
-        return BadRequest(_response);
+        // delete image file if present
+        try
+        {
+            var webRoot = _webHostEnvironment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            if (!string.IsNullOrWhiteSpace(menuItem.Image))
+            {
+                var relative = menuItem.Image.TrimStart('\\', '/');
+                var fullPath = Path.Combine(webRoot, relative);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+            }
+        }
+        catch
+        {
+            // ignore file delete failures
+        }
+
+        _db.MenuItems.Remove(menuItem);
+        await _db.SaveChangesAsync();
+
+        _response.StatusCode = HttpStatusCode.OK;
+        _response.IsSuccess = true;
+        return Ok(_response);
     }
 }
