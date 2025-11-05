@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mango_BackEnd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ece5aa4c22d3cb54d928334a068d387e17180fb0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+547f8fa9f4341471a19e3d25a4bcdc0385fd070f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mango_BackEnd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mango_BackEnd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

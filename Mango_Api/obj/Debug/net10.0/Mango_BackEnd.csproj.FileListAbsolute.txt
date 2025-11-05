@@ -169,3 +169,4 @@ C:\Users\Anton\YrkesUtbidning\Udemy course\Vue Code\Vue_Fundamentals\mango_api\o
 C:\Users\Anton\YrkesUtbidning\Udemy course\Vue Code\Vue_Fundamentals\mango_api\obj\Debug\net10.0\Mango_BackEnd.pdb
 C:\Users\Anton\YrkesUtbidning\Udemy course\Vue Code\Vue_Fundamentals\mango_api\obj\Debug\net10.0\Mango_BackEnd.genruntimeconfig.cache
 C:\Users\Anton\YrkesUtbidning\Udemy course\Vue Code\Vue_Fundamentals\mango_api\obj\Debug\net10.0\ref\Mango_BackEnd.dll
+C:\Users\Anton\YrkesUtbidning\Udemy course\Vue Code\Vue_Fundamentals\Mango_Api\bin\Debug\net10.0\Mango_BackEnd.staticwebassets.runtime.json
