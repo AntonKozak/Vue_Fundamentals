@@ -157,7 +157,7 @@
           }
         }
       },
-      "Microsoft.Build.Framework/17.14.8": {
+      "Microsoft.Build.Framework/17.14.28": {
         "type": "package",
         "compile": {
           "ref/net9.0/Microsoft.Build.Framework.dll": {
@@ -170,12 +170,12 @@
           }
         }
       },
-      "Microsoft.Build.Tasks.Core/17.14.8": {
+      "Microsoft.Build.Tasks.Core/17.14.28": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Build.Framework": "17.14.8",
-          "Microsoft.Build.Utilities.Core": "17.14.8",
-          "Microsoft.NET.StringTools": "17.14.8",
+          "Microsoft.Build.Framework": "17.14.28",
+          "Microsoft.Build.Utilities.Core": "17.14.28",
+          "Microsoft.NET.StringTools": "17.14.28",
           "System.CodeDom": "9.0.0",
           "System.Configuration.ConfigurationManager": "9.0.0",
           "System.Formats.Nrbf": "9.0.0",
@@ -194,11 +194,11 @@
           }
         }
       },
-      "Microsoft.Build.Utilities.Core/17.14.8": {
+      "Microsoft.Build.Utilities.Core/17.14.28": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Build.Framework": "17.14.8",
-          "Microsoft.NET.StringTools": "17.14.8",
+          "Microsoft.Build.Framework": "17.14.28",
+          "Microsoft.NET.StringTools": "17.14.28",
           "System.Configuration.ConfigurationManager": "9.0.0",
           "System.Security.Cryptography.ProtectedData": "9.0.0"
         },
@@ -877,7 +877,7 @@
           }
         }
       },
-      "Microsoft.NET.StringTools/17.14.8": {
+      "Microsoft.NET.StringTools/17.14.28": {
         "type": "package",
         "compile": {
           "ref/net9.0/Microsoft.NET.StringTools.dll": {
@@ -1468,10 +1468,10 @@
         "ref/net7.0/Microsoft.Build.xml"
       ]
     },
-    "Microsoft.Build.Framework/17.14.8": {
-      "sha512": "hwpXdyiD8phuIRtYK4fcPrSKRXn6MHI37IkbvAM2D50OnPRbmKGPwtrXi/vYQ7+VQbMzmw1zaKp+rsroBwNGtg==",
+    "Microsoft.Build.Framework/17.14.28": {
+      "sha512": "wRcyTzGV0LRAtFdrddtioh59Ky4/zbvyraP0cQkDzRSRkhgAQb0K88D/JNC6VHLIXanRi3mtV1jU0uQkBwmiVg==",
       "type": "package",
-      "path": "microsoft.build.framework/17.14.8",
+      "path": "microsoft.build.framework/17.14.28",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1483,7 +1483,7 @@
         "lib/net9.0/Microsoft.Build.Framework.dll",
         "lib/net9.0/Microsoft.Build.Framework.pdb",
         "lib/net9.0/Microsoft.Build.Framework.xml",
-        "microsoft.build.framework.17.14.8.nupkg.sha512",
+        "microsoft.build.framework.17.14.28.nupkg.sha512",
         "microsoft.build.framework.nuspec",
         "notices/THIRDPARTYNOTICES.txt",
         "ref/net472/Microsoft.Build.Framework.dll",
@@ -1494,10 +1494,10 @@
         "ref/netstandard2.0/Microsoft.Build.Framework.xml"
       ]
     },
-    "Microsoft.Build.Tasks.Core/17.14.8": {
-      "sha512": "Wvmz7gpstoGHLOVpOy2/Upsa+N1D/xqg7DUcqRi1DiabEPTRSRXVg0cbjXAgoS3754g2JPgCVm3/xRZxmSW51w==",
+    "Microsoft.Build.Tasks.Core/17.14.28": {
+      "sha512": "jk3O0tXp9QWPXhLJ7Pl8wm/eGtGgA1++vwHGWEmnwMU6eP//ghtcCUpQh9CQMwEKGDnH0aJf285V1s8yiSlKfQ==",
       "type": "package",
-      "path": "microsoft.build.tasks.core/17.14.8",
+      "path": "microsoft.build.tasks.core/17.14.28",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1509,7 +1509,7 @@
         "lib/net9.0/Microsoft.Build.Tasks.Core.dll",
         "lib/net9.0/Microsoft.Build.Tasks.Core.pdb",
         "lib/net9.0/Microsoft.Build.Tasks.Core.xml",
-        "microsoft.build.tasks.core.17.14.8.nupkg.sha512",
+        "microsoft.build.tasks.core.17.14.28.nupkg.sha512",
         "microsoft.build.tasks.core.nuspec",
         "notices/THIRDPARTYNOTICES.txt",
         "ref/net472/Microsoft.Build.Tasks.Core.dll",
@@ -1520,10 +1520,10 @@
         "ref/netstandard2.0/Microsoft.Build.Tasks.Core.xml"
       ]
     },
-    "Microsoft.Build.Utilities.Core/17.14.8": {
-      "sha512": "y9YkXfwoSduSYMSpf8wbIhn7XGmO+pNG5p4lqDSjGLxQ7KBHcnlvsfz+W3Hsp82abHFk3xCLPLImMZ9wUnWQCw==",
+    "Microsoft.Build.Utilities.Core/17.14.28": {
+      "sha512": "rhSdPo8QfLXXWM+rY0x0z1G4KK4ZhMoIbHROyDj8MUBFab9nvHR0NaMnjzOgXldhmD2zi2ir8d6xCatNzlhF5g==",
       "type": "package",
-      "path": "microsoft.build.utilities.core/17.14.8",
+      "path": "microsoft.build.utilities.core/17.14.28",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1535,7 +1535,7 @@
         "lib/net9.0/Microsoft.Build.Utilities.Core.dll",
         "lib/net9.0/Microsoft.Build.Utilities.Core.pdb",
         "lib/net9.0/Microsoft.Build.Utilities.Core.xml",
-        "microsoft.build.utilities.core.17.14.8.nupkg.sha512",
+        "microsoft.build.utilities.core.17.14.28.nupkg.sha512",
         "microsoft.build.utilities.core.nuspec",
         "notices/THIRDPARTYNOTICES.txt",
         "ref/net472/Microsoft.Build.Utilities.Core.dll",
@@ -3019,10 +3019,10 @@
         "microsoft.identitymodel.tokens.nuspec"
       ]
     },
-    "Microsoft.NET.StringTools/17.14.8": {
-      "sha512": "j85iHjtDLnqVSLCv2Rfee9WI6NzcQX9fqVjnuIgiSeQSTm5MFwBaeNL/rwil4RUaHUF9GXtfxvSEg6jYF6cxCw==",
+    "Microsoft.NET.StringTools/17.14.28": {
+      "sha512": "DMIeWDlxe0Wz0DIhJZ2FMoGQAN2yrGZOi5jjFhRYHWR5ONd0CS6IpAHlRnA7uA/5BF+BADvgsETxW2XrPiFc1A==",
       "type": "package",
-      "path": "microsoft.net.stringtools/17.14.8",
+      "path": "microsoft.net.stringtools/17.14.28",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3037,7 +3037,7 @@
         "lib/netstandard2.0/Microsoft.NET.StringTools.dll",
         "lib/netstandard2.0/Microsoft.NET.StringTools.pdb",
         "lib/netstandard2.0/Microsoft.NET.StringTools.xml",
-        "microsoft.net.stringtools.17.14.8.nupkg.sha512",
+        "microsoft.net.stringtools.17.14.28.nupkg.sha512",
         "microsoft.net.stringtools.nuspec",
         "notices/THIRDPARTYNOTICES.txt",
         "ref/net472/Microsoft.NET.StringTools.dll",
@@ -3649,6 +3649,8 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 10.0.0-rc.2.25502.107",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 10.0.0-rc.2.25502.107",
       "Microsoft.AspNetCore.OpenApi >= 10.0.0-rc.2.25502.107",
+      "Microsoft.Build.Tasks.Core >= 17.14.28",
+      "Microsoft.Build.Utilities.Core >= 17.14.28",
       "Microsoft.EntityFrameworkCore.SqlServer >= 10.0.0-rc.2.25502.107",
       "Microsoft.EntityFrameworkCore.Tools >= 10.0.0-rc.2.25502.107",
       "Scalar.AspNetCore >= 2.10.0",
@@ -3709,6 +3711,14 @@
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[10.0.0-rc.2.25502.107, )"
+          },
+          "Microsoft.Build.Tasks.Core": {
+            "target": "Package",
+            "version": "[17.14.28, )"
+          },
+          "Microsoft.Build.Utilities.Core": {
+            "target": "Package",
+            "version": "[17.14.28, )"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
@@ -4164,27 +4174,5 @@
         }
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.Build.Tasks.Core' 17.14.8 has a known high severity vulnerability, https://github.com/advisories/GHSA-w3q9-fxm7-j8fq",
-      "libraryId": "Microsoft.Build.Tasks.Core",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    },
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.Build.Utilities.Core' 17.14.8 has a known high severity vulnerability, https://github.com/advisories/GHSA-w3q9-fxm7-j8fq",
-      "libraryId": "Microsoft.Build.Utilities.Core",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  }
 }

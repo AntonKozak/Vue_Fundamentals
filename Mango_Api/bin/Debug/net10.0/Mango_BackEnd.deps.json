@@ -11,6 +11,8 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.0-rc.2.25502.107",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "10.0.0-rc.2.25502.107",
           "Microsoft.AspNetCore.OpenApi": "10.0.0-rc.2.25502.107",
+          "Microsoft.Build.Tasks.Core": "17.14.28",
+          "Microsoft.Build.Utilities.Core": "17.14.28",
           "Microsoft.EntityFrameworkCore.SqlServer": "10.0.0-rc.2.25502.107",
           "Microsoft.EntityFrameworkCore.Tools": "10.0.0-rc.2.25502.107",
           "Scalar.AspNetCore": "2.10.0",
@@ -105,8 +107,8 @@
       },
       "Microsoft.Build/17.7.2": {
         "dependencies": {
-          "Microsoft.Build.Framework": "17.14.8",
-          "Microsoft.NET.StringTools": "17.14.8",
+          "Microsoft.Build.Framework": "17.14.28",
+          "Microsoft.NET.StringTools": "17.14.28",
           "System.Configuration.ConfigurationManager": "9.0.4",
           "System.Reflection.MetadataLoadContext": "7.0.0",
           "System.Security.Permissions": "9.0.0"
@@ -118,19 +120,19 @@
           }
         }
       },
-      "Microsoft.Build.Framework/17.14.8": {
+      "Microsoft.Build.Framework/17.14.28": {
         "runtime": {
           "lib/net9.0/Microsoft.Build.Framework.dll": {
             "assemblyVersion": "15.1.0.0",
-            "fileVersion": "17.14.8.25101"
+            "fileVersion": "17.14.28.46601"
           }
         }
       },
-      "Microsoft.Build.Tasks.Core/17.14.8": {
+      "Microsoft.Build.Tasks.Core/17.14.28": {
         "dependencies": {
-          "Microsoft.Build.Framework": "17.14.8",
-          "Microsoft.Build.Utilities.Core": "17.14.8",
-          "Microsoft.NET.StringTools": "17.14.8",
+          "Microsoft.Build.Framework": "17.14.28",
+          "Microsoft.Build.Utilities.Core": "17.14.28",
+          "Microsoft.NET.StringTools": "17.14.28",
           "System.CodeDom": "9.0.0",
           "System.Configuration.ConfigurationManager": "9.0.4",
           "System.Formats.Nrbf": "9.0.0",
@@ -140,21 +142,21 @@
         "runtime": {
           "lib/net9.0/Microsoft.Build.Tasks.Core.dll": {
             "assemblyVersion": "15.1.0.0",
-            "fileVersion": "17.14.8.25101"
+            "fileVersion": "17.14.28.46601"
           }
         }
       },
-      "Microsoft.Build.Utilities.Core/17.14.8": {
+      "Microsoft.Build.Utilities.Core/17.14.28": {
         "dependencies": {
-          "Microsoft.Build.Framework": "17.14.8",
-          "Microsoft.NET.StringTools": "17.14.8",
+          "Microsoft.Build.Framework": "17.14.28",
+          "Microsoft.NET.StringTools": "17.14.28",
           "System.Configuration.ConfigurationManager": "9.0.4",
           "System.Security.Cryptography.ProtectedData": "9.0.4"
         },
         "runtime": {
           "lib/net9.0/Microsoft.Build.Utilities.Core.dll": {
             "assemblyVersion": "15.1.0.0",
-            "fileVersion": "17.14.8.25101"
+            "fileVersion": "17.14.28.46601"
           }
         }
       },
@@ -373,9 +375,9 @@
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.Build": "17.7.2",
-          "Microsoft.Build.Framework": "17.14.8",
-          "Microsoft.Build.Tasks.Core": "17.14.8",
-          "Microsoft.Build.Utilities.Core": "17.14.8",
+          "Microsoft.Build.Framework": "17.14.28",
+          "Microsoft.Build.Tasks.Core": "17.14.28",
+          "Microsoft.Build.Utilities.Core": "17.14.28",
           "Microsoft.CodeAnalysis.Workspaces.Common": "4.14.0",
           "Newtonsoft.Json": "13.0.3",
           "System.CodeDom": "9.0.0",
@@ -552,9 +554,9 @@
       "Microsoft.EntityFrameworkCore.Design/10.0.0-rc.2.25502.107": {
         "dependencies": {
           "Humanizer.Core": "2.14.1",
-          "Microsoft.Build.Framework": "17.14.8",
-          "Microsoft.Build.Tasks.Core": "17.14.8",
-          "Microsoft.Build.Utilities.Core": "17.14.8",
+          "Microsoft.Build.Framework": "17.14.28",
+          "Microsoft.Build.Tasks.Core": "17.14.28",
+          "Microsoft.Build.Utilities.Core": "17.14.28",
           "Microsoft.CodeAnalysis.CSharp": "4.14.0",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.14.0",
           "Microsoft.CodeAnalysis.Workspaces.MSBuild": "4.14.0",
@@ -693,11 +695,11 @@
           }
         }
       },
-      "Microsoft.NET.StringTools/17.14.8": {
+      "Microsoft.NET.StringTools/17.14.28": {
         "runtime": {
           "lib/net9.0/Microsoft.NET.StringTools.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "17.14.8.25101"
+            "fileVersion": "17.14.28.46601"
           }
         }
       },
@@ -987,26 +989,26 @@
       "path": "microsoft.build/17.7.2",
       "hashPath": "microsoft.build.17.7.2.nupkg.sha512"
     },
-    "Microsoft.Build.Framework/17.14.8": {
+    "Microsoft.Build.Framework/17.14.28": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hwpXdyiD8phuIRtYK4fcPrSKRXn6MHI37IkbvAM2D50OnPRbmKGPwtrXi/vYQ7+VQbMzmw1zaKp+rsroBwNGtg==",
-      "path": "microsoft.build.framework/17.14.8",
-      "hashPath": "microsoft.build.framework.17.14.8.nupkg.sha512"
+      "sha512": "sha512-wRcyTzGV0LRAtFdrddtioh59Ky4/zbvyraP0cQkDzRSRkhgAQb0K88D/JNC6VHLIXanRi3mtV1jU0uQkBwmiVg==",
+      "path": "microsoft.build.framework/17.14.28",
+      "hashPath": "microsoft.build.framework.17.14.28.nupkg.sha512"
     },
-    "Microsoft.Build.Tasks.Core/17.14.8": {
+    "Microsoft.Build.Tasks.Core/17.14.28": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Wvmz7gpstoGHLOVpOy2/Upsa+N1D/xqg7DUcqRi1DiabEPTRSRXVg0cbjXAgoS3754g2JPgCVm3/xRZxmSW51w==",
-      "path": "microsoft.build.tasks.core/17.14.8",
-      "hashPath": "microsoft.build.tasks.core.17.14.8.nupkg.sha512"
+      "sha512": "sha512-jk3O0tXp9QWPXhLJ7Pl8wm/eGtGgA1++vwHGWEmnwMU6eP//ghtcCUpQh9CQMwEKGDnH0aJf285V1s8yiSlKfQ==",
+      "path": "microsoft.build.tasks.core/17.14.28",
+      "hashPath": "microsoft.build.tasks.core.17.14.28.nupkg.sha512"
     },
-    "Microsoft.Build.Utilities.Core/17.14.8": {
+    "Microsoft.Build.Utilities.Core/17.14.28": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-y9YkXfwoSduSYMSpf8wbIhn7XGmO+pNG5p4lqDSjGLxQ7KBHcnlvsfz+W3Hsp82abHFk3xCLPLImMZ9wUnWQCw==",
-      "path": "microsoft.build.utilities.core/17.14.8",
-      "hashPath": "microsoft.build.utilities.core.17.14.8.nupkg.sha512"
+      "sha512": "sha512-rhSdPo8QfLXXWM+rY0x0z1G4KK4ZhMoIbHROyDj8MUBFab9nvHR0NaMnjzOgXldhmD2zi2ir8d6xCatNzlhF5g==",
+      "path": "microsoft.build.utilities.core/17.14.28",
+      "hashPath": "microsoft.build.utilities.core.17.14.28.nupkg.sha512"
     },
     "Microsoft.CodeAnalysis.Common/4.14.0": {
       "type": "package",
@@ -1162,12 +1164,12 @@
       "path": "microsoft.identitymodel.tokens/8.14.0",
       "hashPath": "microsoft.identitymodel.tokens.8.14.0.nupkg.sha512"
     },
-    "Microsoft.NET.StringTools/17.14.8": {
+    "Microsoft.NET.StringTools/17.14.28": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-j85iHjtDLnqVSLCv2Rfee9WI6NzcQX9fqVjnuIgiSeQSTm5MFwBaeNL/rwil4RUaHUF9GXtfxvSEg6jYF6cxCw==",
-      "path": "microsoft.net.stringtools/17.14.8",
-      "hashPath": "microsoft.net.stringtools.17.14.8.nupkg.sha512"
+      "sha512": "sha512-DMIeWDlxe0Wz0DIhJZ2FMoGQAN2yrGZOi5jjFhRYHWR5ONd0CS6IpAHlRnA7uA/5BF+BADvgsETxW2XrPiFc1A==",
+      "path": "microsoft.net.stringtools/17.14.28",
+      "hashPath": "microsoft.net.stringtools.17.14.28.nupkg.sha512"
     },
     "Microsoft.OpenApi/2.0.0": {
       "type": "package",

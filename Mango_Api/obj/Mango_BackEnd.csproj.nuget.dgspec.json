@@ -56,6 +56,14 @@
               "target": "Package",
               "version": "[10.0.0-rc.2.25502.107, )"
             },
+            "Microsoft.Build.Tasks.Core": {
+              "target": "Package",
+              "version": "[17.14.28, )"
+            },
+            "Microsoft.Build.Utilities.Core": {
+              "target": "Package",
+              "version": "[17.14.28, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[10.0.0-rc.2.25502.107, )"
