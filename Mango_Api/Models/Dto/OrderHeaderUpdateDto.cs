@@ -4,13 +4,9 @@ namespace Mango_Api.Models.Dto;
 
 public class OrderHeaderUpdateDto
 {
-    [Required]
     public int OrderHeaderId { get; set; }
-    [Required]
-    public string PickUpName { get; set; } = string.Empty;
-    [Required]
-    public string PickUpPhoneNumber { get; set; } = string.Empty;
-    [Required]
-    public string PickUpEmail { get; set; } = string.Empty;
-    public string Status { get; set; } = string.Empty;
+    public string? PickUpName { get; set; }
+    public string? PickUpPhoneNumber { get; set; }
+    public string? PickUpEmail { get; set; }
+    public string? Status { get; set; }
 }

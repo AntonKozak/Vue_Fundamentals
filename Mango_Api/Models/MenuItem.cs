@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mango_Api.Models;
 
@@ -17,4 +18,6 @@ public class MenuItem
     public double Price { get; set; }
     [Required]
     public string Image { get; set; } = string.Empty;
+    [NotMapped]
+    public double Rating { get; set; }
 }

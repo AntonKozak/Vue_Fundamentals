@@ -13,11 +13,12 @@ public class OrderHeader
     public string PickUpPhoneNumber { get; set; } = string.Empty;
     [Required]
     public string PickUpEmail { get; set; } = string.Empty;
-    public DateTime OrderTime { get; set; }
+    public DateTime OrderDate { get; set; } = DateTime.UtcNow;
     public string ApplicationUserId { get; set; } = string.Empty;
     [ForeignKey("ApplicationUserId")]
     public ApplicationUser? ApplicationUser { get; set; }
     public string Status { get; set; } = string.Empty;
+    public double OrderTotal { get; set; }
     public int TotalItem { get; set; }
 
     public List<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();

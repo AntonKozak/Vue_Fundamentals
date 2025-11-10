@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using Mango_Api.Data;
 using Mango_Api.Models;
 using Mango_Api.Models.Dto;
+using Mango_BackEnd.Data.Migrations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore; // added
 
@@ -25,7 +26,23 @@ public class MenuItemController : Controller
     [HttpGet]
     public IActionResult GetMenuItems()
     {
-        _response.Result = _db.MenuItems.ToList();
+        List<MenuItem> menuItems = _db.MenuItems.ToList();
+
+        List<OrderDetail> orderDetailsWithRatings = _db.OrderDetails
+            .Where(od => od.Rating.HasValue)
+            .ToList();
+
+        foreach (var menuItem in menuItems)
+        {
+            var ratingsForMenuItem = orderDetailsWithRatings
+                .Where(od => od.MenuItemId == menuItem.Id)
+                .Select(od => od.Rating!.Value)
+                .ToList();
+
+            menuItem.Rating = ratingsForMenuItem.Any() ? ratingsForMenuItem.Average() : 0;
+        }
+
+        _response.Result = menuItems;
         _response.StatusCode = HttpStatusCode.OK;
         return Ok(_response);
     }
@@ -40,7 +57,9 @@ public class MenuItemController : Controller
             _response.StatusCode = HttpStatusCode.BadRequest;
             return BadRequest(_response);
         }
-        var menuItem = _db.MenuItems.FirstOrDefault(u => u.Id == id);
+
+        MenuItem? menuItem = _db.MenuItems.FirstOrDefault(u => u.Id == id);
+
         if (menuItem == null)
         {
             _response.IsSuccess = false;
@@ -48,6 +67,18 @@ public class MenuItemController : Controller
             _response.StatusCode = HttpStatusCode.NotFound;
             return NotFound(_response);
         }
+
+        List<OrderDetail> orderDetailsWithRatings = _db.OrderDetails
+            .Where(od => od.Rating.HasValue)
+            .ToList();
+
+        var ratingsForMenuItem = orderDetailsWithRatings
+            .Where(od => od.MenuItemId == menuItem.Id)
+            .Select(od => od.Rating!.Value)
+            .ToList();
+
+        menuItem.Rating = ratingsForMenuItem.Any() ? ratingsForMenuItem.Average() : 0;
+
         _response.Result = menuItem;
         _response.StatusCode = HttpStatusCode.OK;
         return Ok(_response);

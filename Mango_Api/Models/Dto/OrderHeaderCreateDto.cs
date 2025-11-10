@@ -10,9 +10,8 @@ public class OrderHeaderCreateDto
     public string PickUpPhoneNumber { get; set; } = string.Empty;
     [Required]
     public string PickUpEmail { get; set; } = string.Empty;
-    public DateTime OrderTime { get; set; }
     public string ApplicationUserId { get; set; } = string.Empty;
-    public string Status { get; set; } = string.Empty;
+    public double OrderTotal { get; set; }
     public int TotalItem { get; set; }
 
     public List<OrderDetailsCreateDto> OrderDetails { get; set; } = new();
