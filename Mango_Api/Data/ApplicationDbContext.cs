@@ -1,4 +1,3 @@
-using System.ComponentModel.Design;
 using Mango_Api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -14,6 +13,8 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     }
     public DbSet<MenuItem> MenuItems { get; set; }
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+    public DbSet<OrderHeader> OrderHeaders { get; set; }
+    public DbSet<OrderDetail> OrderDetails { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
