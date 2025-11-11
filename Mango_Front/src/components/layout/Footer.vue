@@ -1,10 +1,10 @@
 <template>
-    <footer class="footer">
+    <footer class="footer bg-body-secondary border-top">
         <div class="footer-content">
             <!-- Company Info Section -->
             <div class="footer-section">
-                <h3 class="footer-title">{{ companyName }}</h3>
-                <p class="footer-description">{{ companyDescription }}</p>
+                <h3 class="footer-title text-success">{{ companyName }}</h3>
+                <p class="footer-description text-muted">{{ companyDescription }}</p>
             </div>
 
             <!-- Quick Links Section -->
@@ -24,7 +24,7 @@
             <!-- Contact Section -->
             <div class="footer-section">
                 <h4 class="section-title">Contact Us</h4>
-                <address class="contact-info">
+                <address class="contact-info text-muted">
                     <p v-if="contact.email">
                         <span class="icon">📧</span>
                         <a :href="`mailto:${contact.email}`" class="footer-link">
@@ -57,11 +57,11 @@
         </div>
 
         <!-- Copyright Section -->
-        <div class="footer-bottom">
-            <p>&copy; {{ currentYear }} {{ companyName }}. All rights reserved.</p>
+        <div class="footer-bottom border-top">
+            <p class="text-muted">&copy; {{ currentYear }} {{ companyName }}. All rights reserved.</p>
             <div class="footer-legal">
                 <router-link to="/privacy" class="footer-link">Privacy Policy</router-link>
-                <span class="separator">|</span>
+                <span class="separator text-muted">|</span>
                 <router-link to="/terms" class="footer-link">Terms of Service</router-link>
             </div>
         </div>
@@ -112,8 +112,6 @@ const socialMedia = [
 
 <style scoped>
 .footer {
-    background-color: #2c3e50;
-    color: #ecf0f1;
     padding: 3rem 2rem 1rem;
     margin-top: auto;
 }
@@ -135,18 +133,15 @@ const socialMedia = [
 .footer-title {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    color: #3498db;
 }
 
 .section-title {
     font-size: 1.1rem;
     margin-bottom: 1rem;
-    color: #ecf0f1;
     font-weight: 600;
 }
 
 .footer-description {
-    color: #bdc3c7;
     line-height: 1.6;
 }
 
@@ -161,18 +156,17 @@ const socialMedia = [
 }
 
 .footer-link {
-    color: #bdc3c7;
+    color: var(--bs-secondary-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .footer-link:hover {
-    color: #3498db;
+    color: var(--bs-success);
 }
 
 .contact-info {
     font-style: normal;
-    color: #bdc3c7;
 }
 
 .contact-info p {
@@ -205,7 +199,6 @@ const socialMedia = [
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 2rem;
-    border-top: 1px solid #34495e;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -214,7 +207,6 @@ const socialMedia = [
 }
 
 .footer-bottom p {
-    color: #95a5a6;
     margin: 0;
 }
 
@@ -222,10 +214,6 @@ const socialMedia = [
     display: flex;
     gap: 1rem;
     align-items: center;
-}
-
-.separator {
-    color: #7f8c8d;
 }
 
 /* Responsive Design */

@@ -9,9 +9,18 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { RouterView } from 'vue-router';
 import Footer from './components/layout/Footer.vue';
 import Header from './components/layout/Header.vue';
+import { useThemeStore } from './stores/theme';
+
+const themeStore = useThemeStore();
+
+// Ensure theme is applied on mount
+onMounted(() => {
+  themeStore.initTheme();
+});
 </script>
 
 <style>

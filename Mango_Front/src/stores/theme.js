@@ -19,14 +19,14 @@ export const useThemeStore = defineStore('theme', () => {
     applyTheme()
   }
 
-  // Apply theme to document
+  // Apply theme to document using Bootstrap's data-bs-theme
   const applyTheme = () => {
     if (isDark.value) {
-      document.documentElement.setAttribute('data-theme', 'dark')
-      document.body.classList.add('dark-mode')
+      document.documentElement.setAttribute('data-bs-theme', 'dark')
+      document.body.setAttribute('data-bs-theme', 'dark')
     } else {
-      document.documentElement.setAttribute('data-theme', 'light')
-      document.body.classList.remove('dark-mode')
+      document.documentElement.setAttribute('data-bs-theme', 'light')
+      document.body.setAttribute('data-bs-theme', 'light')
     }
   }
 
@@ -46,4 +46,5 @@ export const useThemeStore = defineStore('theme', () => {
     initTheme,
     toggleTheme
   }
-})
+},
+)

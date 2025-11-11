@@ -121,86 +121,16 @@ const handleSearch = () => {
 
 <style scoped>
 .navbar {
-    background-color: var(--bg-secondary);
-    box-shadow: var(--shadow-md);
-    border-bottom: 1px solid var(--border-color);
-    transition: all var(--transition-speed);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand {
     font-weight: 700;
     font-size: 1.5rem;
-    color: var(--color-primary) !important;
-}
-
-.nav-link {
-    color: var(--text-primary) !important;
-    transition: color var(--transition-speed);
-}
-
-.nav-link:hover {
-    color: var(--color-primary) !important;
 }
 
 .nav-link.active {
-    color: var(--color-primary) !important;
     font-weight: 600;
-}
-
-.dropdown-menu {
-    background-color: var(--bg-secondary);
-    border-color: var(--border-color);
-}
-
-.dropdown-item {
-    color: var(--text-primary);
-    transition: all var(--transition-speed);
-}
-
-.dropdown-item:hover {
-    background-color: var(--bg-tertiary);
-    color: var(--color-primary);
-}
-
-.form-control {
-    background-color: var(--bg-primary);
-    border-color: var(--border-color);
-    color: var(--text-primary);
-    transition: all var(--transition-speed);
-}
-
-.form-control:focus {
-    background-color: var(--bg-primary);
-    border-color: var(--color-primary);
-    color: var(--text-primary);
-    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
-}
-
-.form-control::placeholder {
-    color: var(--text-muted);
-}
-
-.btn-outline-primary {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-    transition: all var(--transition-speed);
-}
-
-.btn-outline-primary:hover {
-    background-color: var(--color-primary);
-    color: white;
-}
-
-.navbar-toggler {
-    border-color: var(--border-color);
-}
-
-.navbar-toggler-icon {
-    filter: var(--icon-filter, none);
-}
-
-[data-theme='dark'] .navbar-toggler-icon {
-    filter: invert(1);
 }
 
 .gap-2 {

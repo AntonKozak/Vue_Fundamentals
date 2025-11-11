@@ -1,60 +1,14 @@
-:root {
-  /* Light Theme Colors */
-  --color-primary: #3498db;
-  --color-primary-hover: #2980b9;
-  --color-secondary: #2ecc71;
-  --color-danger: #e74c3c;
-  --color-warning: #f39c12;
-  --color-info: #16a085;
+/* Bootstrap Dark Mode Theme */
+/* Bootstrap 5 handles dark mode automatically with data-bs-theme attribute */
 
-  /* Background Colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --bg-tertiary: #e9ecef;
-
-  /* Text Colors */
-  --text-primary: #2c3e50;
-  --text-secondary: #7f8c8d;
-  --text-muted: #95a5a6;
-
-  /* Border Colors */
-  --border-color: #dee2e6;
-  --border-color-hover: #adb5bd;
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-
-  /* Transitions */
-  --transition-speed: 0.3s;
-}
-
-/* Dark Theme */
-[data-theme='dark'] {
-  /* Background Colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2c2c2c;
-  --bg-tertiary: #3a3a3a;
-
-  /* Text Colors */
-  --text-primary: #ecf0f1;
-  --text-secondary: #bdc3c7;
-  --text-muted: #7f8c8d;
-
-  /* Border Colors */
-  --border-color: #444444;
-  --border-color-hover: #555555;
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
-}
-
-/* Apply theme to body */
+/* Apply theme transition for smooth switching */
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  transition: background-color var(--transition-speed), color var(--transition-speed);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card,
+.table,
+.navbar,
+.btn {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }

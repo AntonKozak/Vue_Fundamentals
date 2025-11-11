@@ -16,8 +16,8 @@ const { toggleTheme } = themeStore
 
 <style scoped>
 .theme-toggle {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: transparent;
+    border: 1px solid var(--bs-border-color);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -25,13 +25,12 @@ const { toggleTheme } = themeStore
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all var(--transition-speed);
+    transition: all 0.3s ease;
 }
 
 .theme-toggle:hover {
-    background: var(--bg-tertiary);
-    border-color: var(--border-color-hover);
     transform: scale(1.1);
+    background: var(--bs-secondary-bg);
 }
 
 .icon {
