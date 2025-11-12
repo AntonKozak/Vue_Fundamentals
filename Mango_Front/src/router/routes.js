@@ -50,7 +50,7 @@ const router = createRouter({
       component: MenuItemUpsert
     },
     {
-      path: '/menu-items/:id/edit',
+      path: '/menu-items/edit/:id',
       name: APP_ROUTES_NAMES.EDIT_MENU_ITEM,
       component: MenuItemUpsert,
       props: true
