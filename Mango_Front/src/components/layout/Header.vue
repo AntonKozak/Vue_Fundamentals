@@ -23,21 +23,23 @@
                         </router-link>
                     </li>
 
-                    <!-- Products Dropdown -->
+                    <!-- Admin Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" @click.prevent="toggleDropdown"
+                            :aria-expanded="isDropdownOpen">
                             Admin
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" :class="{ show: isDropdownOpen }">
                             <li>
-                                <router-link :to="{ name: APP_ROUTES_NAMES.MENU_ITEM_LIST }" class="dropdown-item">
+                                <router-link :to="{ name: APP_ROUTES_NAMES.MENU_ITEM_LIST }" class="dropdown-item"
+                                    @click="closeDropdown">
                                     Menu Items
                                 </router-link>
                             </li>
                             <li>
-                                <router-link :to="{ name: APP_ROUTES_NAMES.MANAGE_ORDER_ADMIN }" class="dropdown-item">
-                                    Order Managment
+                                <router-link :to="{ name: APP_ROUTES_NAMES.MANAGE_ORDER_ADMIN }" class="dropdown-item"
+                                    @click="closeDropdown">
+                                    Order Management
                                 </router-link>
                             </li>
                         </ul>
@@ -58,7 +60,7 @@
                     <li class="nav-item mx-3"><router-link :to="{ name: APP_ROUTES_NAMES.CART }"
                             class="nav-link px-2 position-relative" active-class="active">
                             <i class="bi bi-cart3"></i><span
-                                class="position-absolute start-100 translate-middle badge rounded-pill bg-danger ">0</span>
+                                class="position-absolute start-100 translate-middle badge rounded-pill bg-danger "> {{ cartStore.cartCount }}</span>
                         </router-link></li>
                     <li class="nav-item">
                         <router-link :to="{ name: APP_ROUTES_NAMES.SIGN_IN }" class="nav-link" active-class="active">
@@ -86,11 +88,14 @@
 <script setup>
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import { APP_ROUTES_NAMES } from '@/constant/routeNames'
-import { ref } from 'vue'
+import { useCartStore } from '@/stores/cartStore'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const searchQuery = ref('')
+const isDropdownOpen = ref(false)
+const cartStore = useCartStore()
 
 // Navigation Links using route names from constants
 const navLinks = [
@@ -117,6 +122,31 @@ const handleSearch = () => {
         searchQuery.value = ''
     }
 }
+
+// Dropdown handlers
+const toggleDropdown = () => {
+    isDropdownOpen.value = !isDropdownOpen.value
+}
+
+const closeDropdown = () => {
+    isDropdownOpen.value = false
+}
+
+// Close dropdown when clicking outside
+const handleClickOutside = (event) => {
+    const dropdown = document.querySelector('.dropdown')
+    if (dropdown && !dropdown.contains(event.target)) {
+        closeDropdown()
+    }
+}
+
+onMounted(() => {
+    document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+    document.removeEventListener('click', handleClickOutside)
+})
 </script>
 
 <style scoped>

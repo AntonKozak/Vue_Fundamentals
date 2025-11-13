@@ -11,7 +11,7 @@
                             </h1>
                             <div class="input-group mx-auto shadow-lg rounded-pill overflow-hidden"
                                 style="max-width: 600px">
-                                <input type="text" class="form-control border-0 py-3 px-4"
+                                <input v-model="searchValue" type="text" class="form-control border-0 py-3 px-4"
                                     placeholder="Search your favorite foods..." />
                                 <button class="btn btn-success px-4 d-flex align-items-center border-0">
                                     <i class="bi bi-search"></i>
@@ -30,8 +30,12 @@
                 <!-- Categories -->
                 <div class="col-lg-auto">
                     <div class="d-flex flex-wrap gap-2">
-                        <button class="btn rounded px-4 py-2 fs-7 position-relative overflow-hidden">
-                            <span class="position-relative z-1">CATEGORY</span>
+                        <button @click="updateSelectedCategory(category)" :class="{
+                            'btn-success shadow-sm': category === selectedCategory,
+                            'btn-outline-success': category !== selectedCategory
+                        }" class="btn rounded px-4 py-2 fs-7 position-relative overflow-hidden"
+                            v-for="(category, index) in categoryList" :key="index">
+                            <span class="position-relative z-1">{{ category }}</span>
                         </button>
                     </div>
                 </div>
@@ -40,14 +44,16 @@
                     <div class="dropdown">
                         <button
                             class="btn btn-outline-success rounded px-3 py-2 dropdown-toggle d-flex align-items-center gap-2"
-                            type="button" data-bs-toggle="dropdown">
+                            type="button" @click.prevent="toggleSortDropdown" :aria-expanded="isSortDropdownOpen">
                             <i class="bi bi-sort-down"></i>
-                            <span class="fs-7">SORT OPTION</span>
+                            <span class="fs-7">{{ selectedSortOption }}</span>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm rounded-3">
-                            <li>
-                                <button class="dropdown-item py-2 px-3 d-flex align-items-center gap-2">
-                                    <span class="fs-7 px-3 mx-1">SORT</span>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm rounded-3"
+                            :class="{ show: isSortDropdownOpen }">
+                            <li v-for="(sort, index) in SORT_OPTIONS" :key="index">
+                                <button class="dropdown-item py-2 px-3 d-flex align-items-center gap-2"
+                                    @click="changeSelectedSortOption(sort)">
+                                    <span class="fs-7 px-3 mx-1">{{ sort }}</span>
                                 </button>
                             </li>
                         </ul>
@@ -56,26 +62,149 @@
             </div>
 
             <!-- Content Section -->
-            <div class="text-center py-5">
+            <div v-if="loading" class="text-center py-5">
                 <div class="spinner-border text-success" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
-            <div>
+            <div v-else>
                 <div class="row">
-                    DISPLAY PRODUCTS
+                    <MenuItemCard
+                    v-if="filteredItems.length > 0"
+                    v-for="(item, index) in filteredItems" :key="item.id"
+                        :menuItem="item"
+                    @show-details="handelShowDetails"
+                    class="list-item col-12 col-md-6 col-lg-4 pb-4">
+                    </MenuItemCard>
 
-                    <div class="text-center py-5 display-4 mx-auto text-body-secondary mb-3 d-block">
+                    <div class="text-center py-3 display-4 mx-auto text-body-secondary mb-3 d-block">
                         <i class="bi bi-emoji-frown"></i>
-                        <p class="lead text-body-secondary">No menu items found matching your criteria</p>
+                        <p class="lead text-body-secondary">No menu items found matching your criteria !</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Menu Detail Modal -->
+        <MenuItemDetailsModals
+        :show="showModal"
+        :menuItem="selectedMenuItem"
+        @close="handelCloseDetails"
+        ></MenuItemDetailsModals>
     </div>
 </template>
+
+<script setup>
+
+import MenuItemCard from '@/components/layout/Card/MenuItemCard.vue';
+import MenuItemDetailsModals from '@/components/modals/MenuItemDetailsModal.vue';
+import {
+    CATEGORIES,
+    SORT_NAME_A_Z,
+    SORT_NAME_Z_A,
+    SORT_OPTIONS,
+    SORT_PRICE_HIGH_LOW,
+    SORT_PRICE_LOW_HIGH,
+} from '@/constant/constant';
+import menuItemService from '@/services/menuItemService.js';
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const sortOptionsNames = [
+    SORT_NAME_A_Z,
+    SORT_NAME_Z_A,
+    SORT_PRICE_LOW_HIGH,
+    SORT_PRICE_HIGH_LOW
+];
+
+const loading = ref(false);
+const selectedCategory = ref('All');
+const selectedSortOption = ref(SORT_OPTIONS[0]);
+const isSortDropdownOpen = ref(false);
+const searchValue = ref('');
+const showModal = ref(false);
+const selectedMenuItem = ref(null);
+
+const handelShowDetails = (menuItem) => {
+    selectedMenuItem.value = menuItem;
+    showModal.value = true;
+}
+
+const handelCloseDetails = (menuItem) => {
+    selectedMenuItem.value = null;
+    showModal.value = false;
+}
+
+const router = useRouter();
+
+const categoryList = reactive(['All', ...CATEGORIES]);
+const menuItems = reactive([]);
+
+function updateSelectedCategory(category) {
+    selectedCategory.value = category;
+}
+
+const changeSelectedSortOption = (sort) => {
+    selectedSortOption.value = sort;
+}
+
+// Sort dropdown handlers
+const toggleSortDropdown = () => {
+    isSortDropdownOpen.value = !isSortDropdownOpen.value;
+}
+
+// Close dropdown when clicking outside
+const handleClickOutside = (event) => {
+    const dropdown = event.target.closest('.dropdown');
+    if (!dropdown) {
+        isSortDropdownOpen.value = false;
+    }
+}
+
+const filteredItems = computed(() => {
+
+    let tempArray = selectedCategory.value === 'All' ? menuItems
+        : menuItems.filter(item => item.category === selectedCategory.value);
+    if (searchValue.value.trim()) {
+        tempArray = tempArray.filter(item =>
+            item.name.toUpperCase().includes(searchValue.value.trim().toUpperCase())
+        );
+    }
+    if (selectedSortOption.value === SORT_NAME_A_Z) {
+        tempArray.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (selectedSortOption.value === SORT_NAME_Z_A) {
+        tempArray.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (selectedSortOption.value === SORT_PRICE_LOW_HIGH) {
+        tempArray.sort((a, b) => a.price - b.price);
+    } else if (selectedSortOption.value === SORT_PRICE_HIGH_LOW) {
+        tempArray.sort((a, b) => b.price - a.price);
+    }
+
+    return tempArray;
+});
+
+const fetchMenuItems = async () => {
+    loading.value = true
+    try {
+        var result = await menuItemService.getMenuItems()
+        menuItems.push(...result)
+        console.log('Fetched menu items:', menuItems)
+    } catch (error) {
+        console.error('Error fetching menu items:', error)
+    } finally {
+        loading.value = false
+    }
+}
+
+onMounted(() => {
+    fetchMenuItems();
+    document.addEventListener('click', handleClickOutside);
+})
+
+onUnmounted(() => {
+    document.removeEventListener('click', handleClickOutside);
+})
+</script>
 
 <style scoped>
 .hero-section {
