@@ -1,5 +1,8 @@
 <template>
-  <div id="app" class="app-container">
+  <div
+    id="app"
+    class="app-container"
+  >
     <Header />
     <main class="main-content">
       <RouterView />
@@ -9,18 +12,18 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import { RouterView } from 'vue-router';
-import Footer from './components/layout/Footer.vue';
-import Header from './components/layout/Header.vue';
-import { useThemeStore } from './stores/theme';
+import { onMounted } from 'vue'
+import { RouterView } from 'vue-router'
+import Footer from './components/layout/Footer.vue'
+import Header from './components/layout/Header.vue'
+import { useThemeStore } from './stores/theme'
 
-const themeStore = useThemeStore();
+const themeStore = useThemeStore()
 
 // Ensure theme is applied on mount
 onMounted(() => {
-  themeStore.initTheme();
-});
+  themeStore.initTheme()
+})
 </script>
 
 <style>
@@ -37,7 +40,8 @@ body {
 }
 
 #app {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

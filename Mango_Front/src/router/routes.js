@@ -18,68 +18,68 @@ const router = createRouter({
     {
       path: '/',
       name: APP_ROUTES_NAMES.HOME,
-      component: Home
+      component: Home,
     },
     {
       path: '/no-access',
       name: APP_ROUTES_NAMES.ACCESS_DENIED,
-      component: NoAccess
+      component: NoAccess,
     },
     {
       path: '/sign-in',
       name: APP_ROUTES_NAMES.SIGN_IN,
-      component: SignIn
+      component: SignIn,
     },
     {
       path: '/sign-up',
       name: APP_ROUTES_NAMES.SIGN_UP,
-      component: SignUp
+      component: SignUp,
     },
     {
       path: '/cart',
       name: APP_ROUTES_NAMES.CART,
       component: ShopingCart,
-      beforeEnter: [requireAuth]
+      beforeEnter: [requireAuth],
     },
     {
       path: '/menu-items',
       name: APP_ROUTES_NAMES.MENU_ITEM_LIST,
       component: MenuItemList,
-      beforeEnter: [requireAdmin]
+      beforeEnter: [requireAdmin],
     },
     {
       path: '/menu-items/create',
       name: APP_ROUTES_NAMES.CREATE_MENU_ITEM,
-      component: MenuItemUpsert
+      component: MenuItemUpsert,
     },
     {
       path: '/menu-items/edit/:id',
       name: APP_ROUTES_NAMES.EDIT_MENU_ITEM,
       component: MenuItemUpsert,
-      props: true
+      props: true,
     },
     {
       path: '/order-confirmation/:orderId',
       name: APP_ROUTES_NAMES.ORDER_CONFIRM,
       component: OrderConfirmation,
-      props: true
+      props: true,
     },
     {
       path: '/orders',
       name: APP_ROUTES_NAMES.ORDER_LIST,
-      component: OrderHistoryList
+      component: OrderHistoryList,
     },
     {
       path: '/orders/manage',
       name: APP_ROUTES_NAMES.MANAGE_ORDER_ADMIN,
-      component: OrderManagment
+      component: OrderManagment,
     },
     {
       path: '/:catchAll(.*)',
       name: APP_ROUTES_NAMES.NOT_FOUND,
-      component: Home
-    }
-  ]
+      component: Home,
+    },
+  ],
 })
 
 export default router

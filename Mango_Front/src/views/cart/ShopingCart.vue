@@ -4,34 +4,62 @@
       <div class="col-12">
         <h2 class="mb-4 text-success">Your Cart</h2>
 
-        <div class="text-center py-5" v-if="cartStore.cartCount === 0">
+        <div
+          class="text-center py-5"
+          v-if="cartStore.cartCount === 0"
+        >
           <div class="mb-4">
-            <i class="bi bi-cart" style="font-size: 2rem"></i>
+            <i
+              class="bi bi-cart"
+              style="font-size: 2rem"
+            ></i>
           </div>
           <h3 class="h5 mb-3">Your cart is empty</h3>
           <p class="text-body-secondary mb-4">
             Looks like you haven't added any items to your cart yet.
           </p>
-          <button  @click="continueShopping" class="btn btn-success">
+          <button
+            @click="continueShopping"
+            class="btn btn-success"
+          >
             <i class="bi bi-arrow-left-square"></i>
             Continue Shopping
           </button>
         </div>
 
-        <div v-else >
+        <div v-else>
           <div class="card border-0 shadow-sm mb-4">
             <div class="card-body p-0">
               <div class="table-responsive">
                 <table class="table table-hover mb-0">
                   <thead>
                     <tr>
-                      <th scope="col" class="ps-4 fw-light" style="width: 30%">Item</th>
-                      <th scope="col" class="text-center fw-light" style="width: 15%">Price</th>
-                      <th scope="col" class="" style="width: 45%"></th>
+                      <th
+                        scope="col"
+                        class="ps-4 fw-light"
+                        style="width: 30%"
+                      >
+                        Item
+                      </th>
+                      <th
+                        scope="col"
+                        class="text-center fw-light"
+                        style="width: 15%"
+                      >
+                        Price
+                      </th>
+                      <th
+                        scope="col"
+                        class=""
+                        style="width: 45%"
+                      ></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="item in cartStore.cartItems" :key="item.id">
+                    <tr
+                      v-for="item in cartStore.cartItems"
+                      :key="item.id"
+                    >
                       <td class="ps-4">
                         <div class="d-flex align-items-center gap-3">
                           <img
@@ -39,16 +67,19 @@
                             class="img-fluid rounded d-none d-md-block"
                             style="width: 50px; height: 50px; object-fit: cover"
                           />
-                          <span class="fw-medium">{{item.name}}</span>
+                          <span class="fw-medium">{{ item.name }}</span>
                         </div>
                       </td>
                       <td class="text-center align-middle">
-                        {{item.price}}
+                        {{ item.price }}
                       </td>
                       <td class="align-middle">
-                        <div class="input-group input-group-sm justify-content-center" style="">
+                        <div
+                          class="input-group input-group-sm justify-content-center"
+                          style=""
+                        >
                           <button
-                          @click="decreaseQuantity(item.id)"
+                            @click="decreaseQuantity(item.id)"
                             class="btn btn-outline-secondary"
                             type="button"
                           >
@@ -61,17 +92,18 @@
                             style="max-width: 50px"
                             v-model="item.quantity"
                           />
-                          <button @click="increaseQuantity(item.id)"
+                          <button
+                            @click="increaseQuantity(item.id)"
                             class="btn btn-outline-secondary"
                             type="button"
                           >
-                            <i class="bi bi-plus" ></i>
+                            <i class="bi bi-plus"></i>
                           </button>
                           <button
                             class="btn btn-sm btn-outline-danger mx-md-4 mx-1"
                             @click="removeItem(item.id)"
                           >
-                            <i class="bi bi-trash" ></i>
+                            <i class="bi bi-trash"></i>
                           </button>
                         </div>
                       </td>
@@ -85,11 +117,17 @@
           <div class="row g-4">
             <div class="col-md-6">
               <div class="d-flex gap-2">
-                <button class="btn btn-outline-success" @click="continueShopping">
+                <button
+                  class="btn btn-outline-success"
+                  @click="continueShopping"
+                >
                   <i class="bi bi-arrow-left-square mx-1"></i>
                   <span class="">Continue Shopping</span>
                 </button>
-                <button class="btn btn-outline-danger" @click="cartStore.clearCart()">
+                <button
+                  class="btn btn-outline-danger"
+                  @click="cartStore.clearCart()"
+                >
                   <i class="bi bi-trash mx-1"></i>
                   <span class="">Clear Cart</span>
                 </button>
@@ -101,14 +139,17 @@
                   <h4 class="card-title h6 mb-3">Order Summary</h4>
                   <div class="d-flex justify-content-between mb-2">
                     <span class="text-body-secondary">Items (0):</span>
-                    <span> {{ cartStore.cartCount }} </span>
+                    <span>{{ cartStore.cartCount }}</span>
                   </div>
                   <hr />
                   <div class="d-flex justify-content-between mb-3">
                     <span class="fw-bold">Total:</span>
                     <span class="fw-bold text-success">{{ cartStore.cartTotal }}</span>
                   </div>
-                  <button class="btn btn-success w-100" @click="checkout">
+                  <button
+                    class="btn btn-success w-100"
+                    @click="checkout"
+                  >
                     <i class="bi bi-cash-stack"></i>
                     Proceed to Checkout
                   </button>
@@ -122,48 +163,50 @@
         </div>
       </div>
     </div>
-    <PlaceOrderModal :is-open="showOrderModal" @close="showOrderModal=false"></PlaceOrderModal>
+    <PlaceOrderModal
+      :is-open="showOrderModal"
+      @close="showOrderModal = false"
+    ></PlaceOrderModal>
   </div>
 </template>
 
 <script setup>
-import PlaceOrderModal from '@/components/modals/PlaceOrderModal.vue';
-import { CONFIG_IMAGE_URL } from '@/constant/config';
-import { APP_ROUTES_NAMES } from '@/constant/routeNames';
-import { useCartStore } from '@/stores/cartStore';
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import PlaceOrderModal from '@/components/modals/PlaceOrderModal.vue'
+import { CONFIG_IMAGE_URL } from '@/constant/config'
+import { APP_ROUTES_NAMES } from '@/constant/routeNames'
+import { useCartStore } from '@/stores/cartStore'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const router = useRouter();
-const cartStore = useCartStore();
-const showOrderModal = ref(false);
+const router = useRouter()
+const cartStore = useCartStore()
+const showOrderModal = ref(false)
 
 const continueShopping = () => {
-    router.push({ name: APP_ROUTES_NAMES.HOME });
-};
+  router.push({ name: APP_ROUTES_NAMES.HOME })
+}
 
 const checkout = () => {
   if (cartStore.cartCount === 0) {
-    alert('Your cart is empty! Please add items to your cart before checking out.');
-    return;
+    alert('Your cart is empty! Please add items to your cart before checking out.')
+    return
   }
-  showOrderModal.value = true;
+  showOrderModal.value = true
 }
 
 const removeItem = (itemId) => {
-    cartStore.removeFromCart(itemId);
-};
-const increaseQuantity = (itemId) => {
-    const item = cartStore.cartItems.find(i => i.id === itemId);
-    cartStore.updateQuantity(itemId, item.quantity + 1);
-};
-const decreaseQuantity = (itemId) => {
-    const item = cartStore.cartItems.find(i => i.id === itemId);
-    if (item.quantity > 1) {
-        cartStore.updateQuantity(itemId, item.quantity - 1);
-    } else {
-        cartStore.removeFromCart(itemId);
-    }
+  cartStore.removeFromCart(itemId)
 }
-
+const increaseQuantity = (itemId) => {
+  const item = cartStore.cartItems.find((i) => i.id === itemId)
+  cartStore.updateQuantity(itemId, item.quantity + 1)
+}
+const decreaseQuantity = (itemId) => {
+  const item = cartStore.cartItems.find((i) => i.id === itemId)
+  if (item.quantity > 1) {
+    cartStore.updateQuantity(itemId, item.quantity - 1)
+  } else {
+    cartStore.removeFromCart(itemId)
+  }
+}
 </script>

@@ -1,222 +1,249 @@
 <template>
-    <div>
-        <div class="position-relative overflow-hidden mb-4">
-            <div class="hero-section position-relative py-5 rounded-4" style="min-height: 400px">
-                <div class="container position-relative z-3">
-                    <div class="row justify-content-center text-center">
-                        <div class="col-lg-8 col-xl-7">
-                            <h1 class="display-4 fw-bold text-white mb-4">
-                                Unlock the Art of Flavor<br class="d-none d-lg-block" />
-                                <span class="text-success-emphasis">Your Culinary Journey Begins Here!</span>
-                            </h1>
-                            <div class="input-group mx-auto shadow-lg rounded-pill overflow-hidden"
-                                style="max-width: 600px">
-                                <input v-model="searchValue" type="text" class="form-control border-0 py-3 px-4"
-                                    placeholder="Search your favorite foods..." />
-                                <button class="btn btn-success px-4 d-flex align-items-center border-0">
-                                    <i class="bi bi-search"></i>
-                                    <span class="ms-2 d-none d-sm-inline">Search</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div>
+    <div class="position-relative overflow-hidden mb-4">
+      <div
+        class="hero-section position-relative py-5 rounded-4"
+        style="min-height: 400px"
+      >
+        <div class="container position-relative z-3">
+          <div class="row justify-content-center text-center">
+            <div class="col-lg-8 col-xl-7">
+              <h1 class="display-4 fw-bold text-white mb-4">
+                Unlock the Art of Flavor
+                <br class="d-none d-lg-block" />
+                <span class="text-success-emphasis">Your Culinary Journey Begins Here!</span>
+              </h1>
+              <div
+                class="input-group mx-auto shadow-lg rounded-pill overflow-hidden"
+                style="max-width: 600px"
+              >
+                <input
+                  v-model="searchValue"
+                  type="text"
+                  class="form-control border-0 py-3 px-4"
+                  placeholder="Search your favorite foods..."
+                />
+                <button class="btn btn-success px-4 d-flex align-items-center border-0">
+                  <i class="bi bi-search"></i>
+                  <span class="ms-2 d-none d-sm-inline">Search</span>
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-
-        <div class="container px-0 mx-0">
-            <!-- Filters Section -->
-            <div class="row g-3 my-4 border align-items-center shadow-sm rounded-4 mx-1 pt-1 p-3">
-                <!-- Categories -->
-                <div class="col-lg-auto">
-                    <div class="d-flex flex-wrap gap-2">
-                        <button @click="updateSelectedCategory(category)" :class="{
-                            'btn-success shadow-sm': category === selectedCategory,
-                            'btn-outline-success': category !== selectedCategory
-                        }" class="btn rounded px-4 py-2 fs-7 position-relative overflow-hidden"
-                            v-for="(category, index) in categoryList" :key="index">
-                            <span class="position-relative z-1">{{ category }}</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="col-lg-auto order-1 order-lg-2 ms-lg-auto">
-                    <div class="dropdown">
-                        <button
-                            class="btn btn-outline-success rounded px-3 py-2 dropdown-toggle d-flex align-items-center gap-2"
-                            type="button" @click.prevent="toggleSortDropdown" :aria-expanded="isSortDropdownOpen">
-                            <i class="bi bi-sort-down"></i>
-                            <span class="fs-7">{{ selectedSortOption }}</span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm rounded-3"
-                            :class="{ show: isSortDropdownOpen }">
-                            <li v-for="(sort, index) in SORT_OPTIONS" :key="index">
-                                <button class="dropdown-item py-2 px-3 d-flex align-items-center gap-2"
-                                    @click="changeSelectedSortOption(sort)">
-                                    <span class="fs-7 px-3 mx-1">{{ sort }}</span>
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Content Section -->
-            <div v-if="loading" class="text-center py-5">
-                <div class="spinner-border text-success" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-            <div v-else>
-                <div class="row">
-                    <MenuItemCard
-                    v-if="filteredItems.length > 0"
-                    v-for="(item, index) in filteredItems" :key="item.id"
-                        :menuItem="item"
-                    @show-details="handelShowDetails"
-                    class="list-item col-12 col-md-6 col-lg-4 pb-4">
-                    </MenuItemCard>
-
-                    <div class="text-center py-3 display-4 mx-auto text-body-secondary mb-3 d-block">
-                        <i class="bi bi-emoji-frown"></i>
-                        <p class="lead text-body-secondary">No menu items found matching your criteria !</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Menu Detail Modal -->
-        <MenuItemDetailsModals
-        :show="showModal"
-        :menuItem="selectedMenuItem"
-        @close="handelCloseDetails"
-        ></MenuItemDetailsModals>
+      </div>
     </div>
+
+    <div class="container px-0 mx-0">
+      <!-- Filters Section -->
+      <div class="row g-3 my-4 border align-items-center shadow-sm rounded-4 mx-1 pt-1 p-3">
+        <!-- Categories -->
+        <div class="col-lg-auto">
+          <div class="d-flex flex-wrap gap-2">
+            <button
+              @click="updateSelectedCategory(category)"
+              :class="{
+                'btn-success shadow-sm': category === selectedCategory,
+                'btn-outline-success': category !== selectedCategory,
+              }"
+              class="btn rounded px-4 py-2 fs-7 position-relative overflow-hidden"
+              v-for="(category, index) in categoryList"
+              :key="index"
+            >
+              <span class="position-relative z-1">{{ category }}</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-lg-auto order-1 order-lg-2 ms-lg-auto">
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-success rounded px-3 py-2 dropdown-toggle d-flex align-items-center gap-2"
+              type="button"
+              @click.prevent="toggleSortDropdown"
+              :aria-expanded="isSortDropdownOpen"
+            >
+              <i class="bi bi-sort-down"></i>
+              <span class="fs-7">{{ selectedSortOption }}</span>
+            </button>
+            <ul
+              class="dropdown-menu dropdown-menu-end shadow-sm rounded-3"
+              :class="{ show: isSortDropdownOpen }"
+            >
+              <li
+                v-for="(sort, index) in SORT_OPTIONS"
+                :key="index"
+              >
+                <button
+                  class="dropdown-item py-2 px-3 d-flex align-items-center gap-2"
+                  @click="changeSelectedSortOption(sort)"
+                >
+                  <span class="fs-7 px-3 mx-1">{{ sort }}</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Section -->
+      <div
+        v-if="loading"
+        class="text-center py-5"
+      >
+        <div
+          class="spinner-border text-success"
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div v-else>
+        <div class="row">
+          <MenuItemCard
+            v-if="filteredItems.length > 0"
+            v-for="(item, index) in filteredItems"
+            :key="item.id"
+            :menuItem="item"
+            @show-details="handelShowDetails"
+            class="list-item col-12 col-md-6 col-lg-4 pb-4"
+          ></MenuItemCard>
+
+          <div class="text-center py-3 display-4 mx-auto text-body-secondary mb-3 d-block">
+            <i class="bi bi-emoji-frown"></i>
+            <p class="lead text-body-secondary">No menu items found matching your criteria !</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu Detail Modal -->
+    <MenuItemDetailsModals
+      :show="showModal"
+      :menuItem="selectedMenuItem"
+      @close="handelCloseDetails"
+    ></MenuItemDetailsModals>
+  </div>
 </template>
 
 <script setup>
-
-import MenuItemCard from '@/components/layout/Card/MenuItemCard.vue';
-import MenuItemDetailsModals from '@/components/modals/MenuItemDetailsModal.vue';
+import MenuItemCard from '@/components/Card/MenuItemCard.vue'
+import MenuItemDetailsModals from '@/components/modals/MenuItemDetailsModal.vue'
 import {
-    CATEGORIES,
-    SORT_NAME_A_Z,
-    SORT_NAME_Z_A,
-    SORT_OPTIONS,
-    SORT_PRICE_HIGH_LOW,
-    SORT_PRICE_LOW_HIGH,
-} from '@/constant/constant';
-import menuItemService from '@/services/menuItemService.js';
-import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
-import { useRouter } from 'vue-router';
+  CATEGORIES,
+  SORT_NAME_A_Z,
+  SORT_NAME_Z_A,
+  SORT_OPTIONS,
+  SORT_PRICE_HIGH_LOW,
+  SORT_PRICE_LOW_HIGH,
+} from '@/constant/constant'
+import menuItemService from '@/services/menuItemService.js'
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const sortOptionsNames = [
-    SORT_NAME_A_Z,
-    SORT_NAME_Z_A,
-    SORT_PRICE_LOW_HIGH,
-    SORT_PRICE_HIGH_LOW
-];
+const sortOptionsNames = [SORT_NAME_A_Z, SORT_NAME_Z_A, SORT_PRICE_LOW_HIGH, SORT_PRICE_HIGH_LOW]
 
-const loading = ref(false);
-const selectedCategory = ref('All');
-const selectedSortOption = ref(SORT_OPTIONS[0]);
-const isSortDropdownOpen = ref(false);
-const searchValue = ref('');
-const showModal = ref(false);
-const selectedMenuItem = ref(null);
+const loading = ref(false)
+const selectedCategory = ref('All')
+const selectedSortOption = ref(SORT_OPTIONS[0])
+const isSortDropdownOpen = ref(false)
+const searchValue = ref('')
+const showModal = ref(false)
+const selectedMenuItem = ref(null)
 
 const handelShowDetails = (menuItem) => {
-    selectedMenuItem.value = menuItem;
-    showModal.value = true;
+  selectedMenuItem.value = menuItem
+  showModal.value = true
 }
 
 const handelCloseDetails = (menuItem) => {
-    selectedMenuItem.value = null;
-    showModal.value = false;
+  selectedMenuItem.value = null
+  showModal.value = false
 }
 
-const router = useRouter();
+const router = useRouter()
 
-const categoryList = reactive(['All', ...CATEGORIES]);
-const menuItems = reactive([]);
+const categoryList = reactive(['All', ...CATEGORIES])
+const menuItems = reactive([])
 
 function updateSelectedCategory(category) {
-    selectedCategory.value = category;
+  selectedCategory.value = category
 }
 
 const changeSelectedSortOption = (sort) => {
-    selectedSortOption.value = sort;
+  selectedSortOption.value = sort
 }
 
 // Sort dropdown handlers
 const toggleSortDropdown = () => {
-    isSortDropdownOpen.value = !isSortDropdownOpen.value;
+  isSortDropdownOpen.value = !isSortDropdownOpen.value
 }
 
 // Close dropdown when clicking outside
 const handleClickOutside = (event) => {
-    const dropdown = event.target.closest('.dropdown');
-    if (!dropdown) {
-        isSortDropdownOpen.value = false;
-    }
+  const dropdown = event.target.closest('.dropdown')
+  if (!dropdown) {
+    isSortDropdownOpen.value = false
+  }
 }
 
 const filteredItems = computed(() => {
+  let tempArray =
+    selectedCategory.value === 'All'
+      ? menuItems
+      : menuItems.filter((item) => item.category === selectedCategory.value)
+  if (searchValue.value.trim()) {
+    tempArray = tempArray.filter((item) =>
+      item.name.toUpperCase().includes(searchValue.value.trim().toUpperCase())
+    )
+  }
+  if (selectedSortOption.value === SORT_NAME_A_Z) {
+    tempArray.sort((a, b) => a.name.localeCompare(b.name))
+  } else if (selectedSortOption.value === SORT_NAME_Z_A) {
+    tempArray.sort((a, b) => b.name.localeCompare(a.name))
+  } else if (selectedSortOption.value === SORT_PRICE_LOW_HIGH) {
+    tempArray.sort((a, b) => a.price - b.price)
+  } else if (selectedSortOption.value === SORT_PRICE_HIGH_LOW) {
+    tempArray.sort((a, b) => b.price - a.price)
+  }
 
-    let tempArray = selectedCategory.value === 'All' ? menuItems
-        : menuItems.filter(item => item.category === selectedCategory.value);
-    if (searchValue.value.trim()) {
-        tempArray = tempArray.filter(item =>
-            item.name.toUpperCase().includes(searchValue.value.trim().toUpperCase())
-        );
-    }
-    if (selectedSortOption.value === SORT_NAME_A_Z) {
-        tempArray.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (selectedSortOption.value === SORT_NAME_Z_A) {
-        tempArray.sort((a, b) => b.name.localeCompare(a.name));
-    } else if (selectedSortOption.value === SORT_PRICE_LOW_HIGH) {
-        tempArray.sort((a, b) => a.price - b.price);
-    } else if (selectedSortOption.value === SORT_PRICE_HIGH_LOW) {
-        tempArray.sort((a, b) => b.price - a.price);
-    }
-
-    return tempArray;
-});
+  return tempArray
+})
 
 const fetchMenuItems = async () => {
-    loading.value = true
-    try {
-        var result = await menuItemService.getMenuItems()
-        menuItems.push(...result)
-        console.log('Fetched menu items:', menuItems)
-    } catch (error) {
-        console.error('Error fetching menu items:', error)
-    } finally {
-        loading.value = false
-    }
+  loading.value = true
+  try {
+    var result = await menuItemService.getMenuItems()
+    menuItems.push(...result)
+    console.log('Fetched menu items:', menuItems)
+  } catch (error) {
+    console.error('Error fetching menu items:', error)
+  } finally {
+    loading.value = false
+  }
 }
 
 onMounted(() => {
-    fetchMenuItems();
-    document.addEventListener('click', handleClickOutside);
+  fetchMenuItems()
+  document.addEventListener('click', handleClickOutside)
 })
 
 onUnmounted(() => {
-    document.removeEventListener('click', handleClickOutside);
+  document.removeEventListener('click', handleClickOutside)
 })
 </script>
 
 <style scoped>
 .hero-section {
-    background:
-        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('/src/assets/hero.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('/src/assets/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .text-success-emphasis {
-    color: #75e792 !important;
-    font-weight: 400 !important;
+  color: #75e792 !important;
+  font-weight: 400 !important;
 }
 </style>

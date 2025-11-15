@@ -23,7 +23,7 @@ app.use(router)
 const themeStore = useThemeStore()
 themeStore.initTheme()
 
-const authStore= useAuthStore()
+const authStore = useAuthStore()
 authStore.initialize()
 
 app.mount('#app')

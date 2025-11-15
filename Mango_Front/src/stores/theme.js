@@ -44,7 +44,6 @@ export const useThemeStore = defineStore('theme', () => {
   return {
     isDark,
     initTheme,
-    toggleTheme
+    toggleTheme,
   }
-},
-)
+})
