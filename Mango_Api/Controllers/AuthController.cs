@@ -116,11 +116,12 @@ public class AuthController : ControllerBase
                     SecurityTokenDescriptor tokenDescriptor = new()
                     {
                         Subject = new ClaimsIdentity(
-                        [
-                            new (ClaimTypes.Name, userFromDb.Id.ToString()),
-                            new (ClaimTypes.Email, userFromDb.Email!),
+                            [
+                            new ("fullname",userFromDb.Name),
+                            new ("id",userFromDb.Id),
+                            new (ClaimTypes.Email,userFromDb.Email!.ToString()),
                             new (ClaimTypes.Role, _userManager.GetRolesAsync(userFromDb).Result.FirstOrDefault()!)
-                        ]),
+                            ]),
                         Expires = DateTime.UtcNow.AddDays(5),
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                     };

@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-12">
         <h2 class="mb-4 text-success">Your Cart</h2>
+
         <div class="text-center py-5" v-if="cartStore.cartCount === 0">
           <div class="mb-4">
             <i class="bi bi-cart" style="font-size: 2rem"></i>
@@ -107,7 +108,7 @@
                     <span class="fw-bold">Total:</span>
                     <span class="fw-bold text-success">{{ cartStore.cartTotal }}</span>
                   </div>
-                  <button class="btn btn-success w-100">
+                  <button class="btn btn-success w-100" @click="checkout">
                     <i class="bi bi-cash-stack"></i>
                     Proceed to Checkout
                   </button>
@@ -121,7 +122,7 @@
         </div>
       </div>
     </div>
-    <PlaceOrderModal></PlaceOrderModal>
+    <PlaceOrderModal :is-open="showOrderModal" @close="showOrderModal=false"></PlaceOrderModal>
   </div>
 </template>
 
@@ -130,15 +131,24 @@ import PlaceOrderModal from '@/components/modals/PlaceOrderModal.vue';
 import { CONFIG_IMAGE_URL } from '@/constant/config';
 import { APP_ROUTES_NAMES } from '@/constant/routeNames';
 import { useCartStore } from '@/stores/cartStore';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const cartStore = useCartStore();
+const showOrderModal = ref(false);
 
 const continueShopping = () => {
     router.push({ name: APP_ROUTES_NAMES.HOME });
 };
 
+const checkout = () => {
+  if (cartStore.cartCount === 0) {
+    alert('Your cart is empty! Please add items to your cart before checking out.');
+    return;
+  }
+  showOrderModal.value = true;
+}
 
 const removeItem = (itemId) => {
     cartStore.removeFromCart(itemId);
@@ -155,4 +165,5 @@ const decreaseQuantity = (itemId) => {
         cartStore.removeFromCart(itemId);
     }
 }
-    </script>
+
+</script>

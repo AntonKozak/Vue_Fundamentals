@@ -10,6 +10,7 @@ import OrderConfirmation from '@/views/order/OrderConfirmation.vue'
 import OrderHistoryList from '@/views/order/OrderHistoryList.vue'
 import OrderManagment from '@/views/order/OrderManagment.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import { requireAdmin, requireAuth } from './guards'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,12 +38,14 @@ const router = createRouter({
     {
       path: '/cart',
       name: APP_ROUTES_NAMES.CART,
-      component: ShopingCart
+      component: ShopingCart,
+      beforeEnter: [requireAuth]
     },
     {
       path: '/menu-items',
       name: APP_ROUTES_NAMES.MENU_ITEM_LIST,
-      component: MenuItemList
+      component: MenuItemList,
+      beforeEnter: [requireAdmin]
     },
     {
       path: '/menu-items/create',

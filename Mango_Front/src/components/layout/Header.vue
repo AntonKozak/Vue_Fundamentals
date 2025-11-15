@@ -62,21 +62,33 @@
                             <i class="bi bi-cart3"></i><span
                                 class="position-absolute start-100 translate-middle badge rounded-pill bg-danger "> {{ cartStore.cartCount }}</span>
                         </router-link></li>
-                    <li class="nav-item">
-                        <router-link :to="{ name: APP_ROUTES_NAMES.SIGN_IN }" class="nav-link" active-class="active">
-                            Sign In
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{ name: APP_ROUTES_NAMES.SIGN_UP }" class="nav-link" active-class="active">
-                            Sign Up
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link px-2" active-class="active">
-                            Logout
-                        </button>
-                    </li>
+
+                    <!-- Show when NOT authenticated -->
+                    <template v-if="!authStore.isAuthenticated">
+                        <li class="nav-item">
+                            <router-link :to="{ name: APP_ROUTES_NAMES.SIGN_IN }" class="nav-link" active-class="active">
+                                Sign In
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link :to="{ name: APP_ROUTES_NAMES.SIGN_UP }" class="nav-link" active-class="active">
+                                Sign Up
+                            </router-link>
+                        </li>
+                    </template>
+
+                    <!-- Show when authenticated -->
+                    <template v-else>
+                        <li class="nav-item">
+                            <span class="nav-link">{{ authStore.user.email }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <button @click="authStore.logout()" class="btn btn-link nav-link">
+                                Logout
+                            </button>
+                        </li>
+                    </template>
+
                     <!-- Theme Toggle -->
                     <ThemeToggle />
                 </ul>
@@ -88,6 +100,7 @@
 <script setup>
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import { APP_ROUTES_NAMES } from '@/constant/routeNames'
+import { useAuthStore } from '@/stores/authStore'
 import { useCartStore } from '@/stores/cartStore'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -96,6 +109,7 @@ const router = useRouter()
 const searchQuery = ref('')
 const isDropdownOpen = ref(false)
 const cartStore = useCartStore()
+const authStore = useAuthStore()
 
 // Navigation Links using route names from constants
 const navLinks = [
